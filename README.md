@@ -1,5 +1,5 @@
 # Wrapped_GLFW
- C++ Wrapped for x64 Windows GLFW3
+ C++ Wrapper for x64 Windows GLFW3
   
   
 # Usage
