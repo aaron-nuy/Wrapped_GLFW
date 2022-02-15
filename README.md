@@ -9,3 +9,7 @@
  
  
  Must initialize the library with WGLWindow::init() and when done, terminate it with WGLWindow::terminate() 
+ 
+ 
+ # Build
+ Visual Studio 22 Solution file is included
