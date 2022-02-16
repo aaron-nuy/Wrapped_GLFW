@@ -13,15 +13,15 @@ int main()
 {
     WGLWindow::init();
 
-    WGLWindow winodw(250,250,"Window", NULL);
+    WGLWindow window(250,250,"Window", NULL);
 	
-    while (!winodw.shouldClose()) { 
+    while (!window.shouldClose()) { 
 
-        winodw.setKeyCallback(callbackFunction);
+        window.setKeyCallback(callbackFunction);
 
         WGLWindow::pollEvents();
     }
 	
-    winodw.destroyWindow();
+    window.destroyWindow();
 	WGLWindow::terminate();
 }
