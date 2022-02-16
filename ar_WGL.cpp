@@ -1,17 +1,47 @@
 #pragma once
 #include "ar_WGL.h"
 
-WGLWindow::WGLWindow(int width, int height, const std::string& title)
+WGLWindow::WGLWindow() 
 	:
-	m_Window(glfwCreateWindow(width, height, title.c_str(), NULL, NULL))
+	m_Window(glfwCreateWindow(300, 300, "Window", NULL, NULL))
 {
 }
 
-WGLWindow::WGLWindow(WGLSize size, const std::string& title)
+WGLWindow::WGLWindow(int width, int height, const std::string& title, WGLMonitor primaryMonitor)
 	:
-	m_Window(glfwCreateWindow(size.width(), size.height(), title.c_str(), NULL, NULL))
+	m_Window(glfwCreateWindow(width, height, title.c_str(), primaryMonitor, NULL))
+	
 {
+	if (primaryMonitor == NULL) {
+		m_isFullscreen = 0;
+	}
+	else {
+		m_isFullscreen = 1;
+	}
+}
 
+WGLWindow::WGLWindow(WGLSize size, const std::string& title, WGLMonitor primaryMonitor)
+	:
+	m_Window(glfwCreateWindow(size.width(), size.height(), title.c_str(), primaryMonitor, NULL))
+{
+	if (primaryMonitor == NULL) {
+		m_isFullscreen = 0;
+	}
+	else {
+		m_isFullscreen = 1;
+	}
+}
+
+
+
+WGLWindow::~WGLWindow()
+{
+	glfwDestroyWindow(m_Window);
+}
+
+void WGLWindow::destroyWindow()
+{
+	glfwDestroyWindow(m_Window);
 }
 
 
@@ -35,9 +65,38 @@ void WGLWindow::pollEvents()
 	glfwPollEvents();
 }
 
+WGLMonitor WGLWindow::getPrimaryMonitor()
+{
+	return glfwGetPrimaryMonitor();
+}
+
 void WGLWindow::setTitle(const std::string& title)
 {
 	glfwSetWindowTitle(m_Window, title.c_str());
+}
+
+int WGLWindow::isFullScreen()
+{
+	return m_isFullscreen;
+}
+
+void WGLWindow::setFullScreen()
+{
+	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+	m_isFullscreen = 1;
+}
+
+void WGLWindow::setWindowed(int width, int height, int positionX,int positionY)
+{
+	glfwSetWindowMonitor(m_Window, NULL, positionX, positionY, width, height, GLFW_DONT_CARE);
+	m_isFullscreen = 0;
+}
+
+void WGLWindow::setWindowed(WGLSize size, WGLCoords coords)
+{
+	glfwSetWindowMonitor(m_Window, NULL, coords.x(), coords.y(), size.width(), size.height(), GLFW_DONT_CARE);
+	m_isFullscreen = 0;
 }
 
 void WGLWindow::makeContextCurrent()
@@ -87,14 +146,14 @@ int WGLWindow::isKeyReleased(int key)
 
 
 
-int WGLWindow::isMousePressed()
+int WGLWindow::isMousePressed(int button)
 {
-	return glfwGetMouseButton(m_Window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
+	return glfwGetMouseButton(m_Window, button) == GLFW_PRESS;
 }
 
-int WGLWindow::isMouseReleased()
+int WGLWindow::isMouseReleased(int button)
 {
-	return glfwGetMouseButton(m_Window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE;
+	return glfwGetMouseButton(m_Window, button) == GLFW_RELEASE;
 }
 
 WGLSize WGLWindow::getWindowSize()
@@ -139,6 +198,11 @@ void WGLWindow::setInputMode(int mode, int value)
 GLFWkeyfun WGLWindow::setKeyCallback(GLFWkeyfun callback_handler)
 {
 	return glfwSetKeyCallback(m_Window, callback_handler);
+}
+
+GLFWmousebuttonfun WGLWindow::setMouseButtonCallback(GLFWmousebuttonfun callback_handler)
+{
+	return glfwSetMouseButtonCallback(m_Window, callback_handler);
 }
 
 WGLCoords WGLWindow::getWindowPosition()
