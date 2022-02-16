@@ -46,6 +46,7 @@ public:
 
 	
 	WGLWindow();
+	WGLWindow(WGLWindow& win) = delete;
 	/*
 		if primaryMonir is not specified, it initializes to null
 		if primary monitor is specified with getPrimaryMonitor, window launchs in fullscreen mode
