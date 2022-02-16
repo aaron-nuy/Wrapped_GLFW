@@ -3,14 +3,9 @@
 #include <string>
 
 #define ar_WGLKeyHandler(HandlerName) void HandlerName (GLFWwindow* window, int key, int scancode, int action, int mods)
+#define ar_WGLMouseButtonHandler(HandlerName) void HandlerName (GLFWwindow* window, int button, int action, int mods)
 #define ar_WGLIsKeyPressed(clicked) (key==clicked && action == GLFW_PRESS)
 #define ar_WGLIsKeyReleased(clicked) (key==clicked && action == GLFW_RELEASE)
-#define ar_WGLIsKeyRepeated(clicked) (key==clicked && action == GLFW_REPEAT)
-
-#define ar_WGLMouseButtonHandler(HandlerName) void HandlerName (GLFWwindow* window, int button, int action, int mods)
-#define ar_WGLIsMouseBtnPressed(clicked) (button==clicked && action == GLFW_PRESS)
-#define ar_WGLIsMouseBtnReleased(clicked) (button==clicked && action == GLFW_RELEASE)
-
 
 
 struct WGLSize {
