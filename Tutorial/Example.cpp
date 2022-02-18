@@ -1,8 +1,11 @@
 #include <iostream>
 #include "ar_WGL.h"
 
-
+// Macro that defines a callback function "callbackFunction" 
+// with the corrent signature
 ar_WGLKeyHandler(callbackFunction) {
+	
+	// Macro that tests if space key is pressed
     if (ar_WGLIsKeyPressed(GLFW_KEY_SPACE)) {
         std::cout << "Callback called(?)\n";
     }
@@ -23,5 +26,5 @@ int main()
     }
 	
     window.destroyWindow();
-	WGLWindow::terminate();
+    WGLWindow::terminate();
 }
