@@ -24,7 +24,7 @@
     <ProjectGuid>{0fdd27f3-fa57-4ca3-96ab-91ae778fcf62}</ProjectGuid>
     <RootNamespace>ar_WGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ar_WGL</ProjectName>
+    <ProjectName>ar_Window</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -196,12 +196,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ar_WGL.h" />
+    <ClInclude Include="rtre_Window.h" />
     <ClInclude Include="include\glfw3.h" />
     <ClInclude Include="include\glfw3native.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ar_WGL.cpp" />
+    <ClCompile Include="rtre_Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
